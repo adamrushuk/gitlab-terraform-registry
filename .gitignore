@@ -1,0 +1,8 @@
+# Misc
+.terraform
+localonly
+credentials*
+/temp
+.env
+.terraformrc
+.tgz

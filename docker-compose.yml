@@ -1,0 +1,29 @@
+# https://docs.gitlab.com/ee/install/docker.html#install-gitlab-using-docker-compose
+
+# start container
+# docker compose up
+
+# cleanup
+# sudo rm -rf /srv/gitlab
+
+# http://localhost:8082
+
+# https://docs.docker.com/compose/compose-file/compose-file-v3/
+version: "3.8"
+
+services:
+  gitlab:
+    # https://hub.docker.com/r/gitlab/gitlab-ce/tags?page=1&ordering=last_updated
+    image: "gitlab/gitlab-ce:14.1.2-ce.0"
+    hostname: "localhost"
+    environment:
+      GITLAB_ROOT_PASSWORD: Passw0rd123!
+      GITLAB_INITIAL_SHARED_RUNNERS_REGISTRATION_TOKEN: InitialTokenabcd1234
+      GITLAB_OMNIBUS_CONFIG: |
+        external_url 'http://localhost'
+    ports:
+      - "8082:80"
+    volumes:
+      - "/srv/gitlab/config:/etc/gitlab"
+      - "/srv/gitlab/logs:/var/log/gitlab"
+      - "/srv/gitlab/data:/var/opt/gitlab"
